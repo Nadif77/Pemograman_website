@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Tenaga Pendidik - SD Muhammadiyah Denpasar</title>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"/>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+        <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
+        <link rel="stylesheet" href="index.css"/>
+        <style>
+            body {
+                font-family: "Segoe UI", sans-serif;
+                background-color: #e8f1fc;
+                color: #1a1a1a;
+            }
+            /* Navbar */
+            nav.navbar {
+                background-color: #1e3a8a !important;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            }
+            .navbar .nav-link,
+            .navbar-brand {
+                color: white !important;
+                font-weight: 500;
+            }
+            .navbar-brand img {
+                filter: brightness(1.2);
+            }
+            .dropdown-menu {
+                background-color: #1e3a8a;
+                border: none;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            }
+            .dropdown-item {
+                color: white !important;
+                transition: background-color 0.3s ease;
+            }
+            .dropdown-item:hover {
+                background-color: #2d55aa;
+            }
+            .btn-login {
+                padding: 8px 15px;
+                border: 1px solid white;
+                border-radius: 5px;
+                transition: background-color 0.3s ease, color 0.3s ease;
+            }
+            .btn-login:hover {
+                background-color: white;
+                color: #1e3a8a !important;
+            }
+            /* Hero Sect */
+            .hero {
+                background: linear-gradient(135deg,#1e3a8a,#3b82f6);
+                height: 60vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                text-align: center;
+                position: relative;
+                padding: 20px;
+            }
+            .hero::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 1;
+            }
+            .hero .container {
+                position: relative;
+                z-index: 2;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            }
+            .hero h1 {
+                font-size: 3.5rem;
+                font-weight: bold;
+                margin-bottom: 15px;
+            }
+            .hero p.lead {
+                font-size: 1.5rem;
+                font-weight: 300;
+            }
+            /* General Styling */
+            section {
+                padding: 80px 0;
+            }
+            .section-title {
+                margin-bottom: 50px;
+                font-weight: bold;
+                font-size: 2.8rem;
+                color: #1e3a8a;
+                text-align: center;
+                position: relative;
+            }
+            .section-title::after {
+                content: '';
+                position: absolute;
+                left: 50%;
+                bottom: -15px;
+                transform: translateX(-50%);
+                width: 80px;
+                height: 4px;
+                background-color: #f39c12;
+                border-radius: 2px;
+            }
+            h2 {
+                font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif, cursive;
+                font-weight: bold;
+                text-align: center;
+                margin-top: 30px;
+                color: #2d55aa;
+            }
+            /* Guru Sect */
+            .guru-card {
+                border: none;
+                border-radius: 10px;
+                overflow: hidden;
+                transition: transform 0.3s, box-shadow 0.3s;
+                margin-bottom: 30px;
+                background-color: white;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+            .guru-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            }
+            .guru-img-container {
+                position: relative;
+                overflow: hidden;
+                height: 250px;
+            }
+            .guru-img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.5s;
+            }
+            .guru-card:hover .guru-img {
+                transform: scale(1.05);
+            }
+            .guru-overlay {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.7);
+                color: white;
+                padding: 10px;
+                transform: translateY(100%);
+                transition: transform 0.3s;
+            }
+            .guru-card:hover .guru-overlay {
+                transform: translateY(0);
+            }
+            .guru-category {
+                display: inline-block;
+                background-color: #1e3a8a;
+                color: white;
+                padding: 5px 15px;
+                border-radius: 20px;
+                font-size: 0.8rem;
+                margin-bottom: 10px;
+            }
+            .subject-icon {
+                font-size: 1.5rem;
+                color: #3b82f6;
+                margin-right: 10px;
+            }
+            /* Footer Sect */
+            footer {
+                background-color: #1e3a8a;
+                color: white;
+                padding: 30px 0;
+                margin-top: 50px;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand font-weight-bold" href="#">
+                    <img src="images/logo.png" width="40" class="mr-2" alt="Logo SDM"/>
+                    SD Muhammadiyah Denpasar
+                </a>
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="index.html">Beranda</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a
+                                class="nav-link dropdown-toggle"
+                                href="profil.html"
+                                id="profilDropdown"
+                                role="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false">Profil</a >
+                            <ul class="dropdown-menu" aria-labelledby="profilDropdown">
+                                <li>
+                                    <a class="dropdown-item" href="profil.html#sambutan">Sambutan Kepala Sekolah</a >
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="profil.html#sejarah">Sejarah Sekolah</a >
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="tenaga-didik.html">Tenaga Pendidik</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="profil.html#fasilitas">Fasilitas</a >
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="profil.html#lokasi">Lokasi</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="daftar.html">Pendaftaran</a>
+                        </li>
+                        <!-- <li class="nav-item"> <a class="nav-link" href="materi.html">Materi</a>
+                        </li> -->
+                        <li class="nav-item">
+                            <div class="p-2">
+                                <a href="login.html" class="btn-login" style="color: white">
+                                    Login
+                                    <i class="fas fa-sign-in-alt"></i>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero text-center">
+            <div class="container">
+                <h1 class="display-4 fw-bold mb-3">Tenaga Pendidik Kami</h1>
+                <p class="lead">Guru-guru profesional yang berkomitmen untuk pendidikan terbaik</p>
+            </div>
+        </section>
+
+        <!-- Manajemen SD Muhammadiyah Denpasar -->
+        <section id="manajemen" class="container py-5 bg-light">
+            <h2 class="text-center section-title">Manajemen Guru</h2>
+            <div class="row">
+                <!-- Kepala Sekolah -->
+                <div class="col-md-4 col-lg-3">
+                    <div class="guru-card">
+                        <div class="guru-img-container">
+                            <img src="images/kepsek.png" alt="Kepala Sekolah" class="guru-img">
+                            <div class="guru-overlay">
+                                <div class="d-flex justify-content-center">
+                                    <a href="#" class="btn btn-sm btn-outline-light me-2">
+                                        <i class="fas fa-envelope"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-sm btn-outline-light">
+                                        <i class="fas fa-info-circle"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <span class="guru-category">Kepala Sekolah</span>
+                            <h5 class="card-title">Bapak Rifqi Maulana, S.Pd., Gr., M.Pd.</h5>
+                            <p class="card-text text-muted">Kepala Sekolah</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Wakil Kepala Sekolah -->
+                <div class="col-md-4 col-lg-3">
+                    <div class="guru-card">
+                        <div class="guru-img-container">
+                            <img src="images/wakil-kepsek.jpg" alt="Wakil Kepala" class="guru-img">
+                            <div class="guru-overlay">
+                                <div class="d-flex justify-content-center">
+                                    <a href="#" class="btn btn-sm btn-outline-light me-2">
+                                        <i class="fas fa-envelope"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-sm btn-outline-light">
+                                        <i class="fas fa-info-circle"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <span class="guru-category">Wakil Kepala Sekolah</span>
+                            <h5 class="card-title">Ibu Resti Hidayah</h5>
+                            <p class="card-text text-muted">Wakil Kepala Sekolah</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Guru Kelas -->
+        <section class="container py-5">
+            <h2 class="text-center section-title">Guru Kelas</h2>
+            <div class="row">
+                <!-- Guru Kelas 1A -->
+                <div class="col-md-4 col-lg-3">
+                    <div class="guru-card">
+                        <div class="guru-img-container">
+                            <img src="images/guru1.jpg" alt="Guru Kelas 1" class="guru-img">
+                            <div class="guru-overlay">
+                                <div class="d-flex justify-content-center">
+                                    <a href="#" class="btn btn-sm btn-outline-light me-2">
+                                        <i class="fas fa-envelope"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-sm btn-outline-light">
+                                        <i class="fas fa-info-circle"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <span class="guru-category">Guru Kelas</span>
+                            <h5 class="card-title">Ibu Siti Rahayu</h5>
+                            <p class="card-text text-muted">Kelas 1A</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Guru Kelas 2B -->
+                <div class="col-md-4 col-lg-3">
+                    <div class="guru-card">
+                        <div class="guru-img-container">
+                            <img src="images/guru2.jpg" alt="Guru Kelas 2" class="guru-img">
+                            <div class="guru-overlay">
+                                <div class="d-flex justify-content-center">
+                                    <a href="#" class="btn btn-sm btn-outline-light me-2">
+                                        <i class="fas fa-envelope"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-sm btn-outline-light">
+                                        <i class="fas fa-info-circle"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <span class="guru-category">Guru Kelas</span>
+                            <h5 class="card-title">Bapak Agus Setiawan</h5>
+                            <p class="card-text text-muted">Kelas 2B</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Guru Kelas 3A -->
+                <div class="col-md-4 col-lg-3">
+                    <div class="guru-card">
+                        <div class="guru-img-container">
+                            <img src="images/guru3.jpg" alt="Guru Kelas 3" class="guru-img">
+                            <div class="guru-overlay">
+                                <div class="d-flex justify-content-center">
+                                    <a href="#" class="btn btn-sm btn-outline-light me-2">
+                                        <i class="fas fa-envelope"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-sm btn-outline-light">
+                                        <i class="fas fa-info-circle"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <span class="guru-category">Guru Kelas</span>
+                            <h5 class="card-title">Ibu Dian Permatasari</h5>
+                            <p class="card-text text-muted">Kelas 3A</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Guru Kelas 4B -->
+                <div class="col-md-4 col-lg-3">
+                    <div class="guru-card">
+                        <div class="guru-img-container">
+                            <img src="images/guru4.jpg" alt="Guru Kelas 4" class="guru-img">
+                            <div class="guru-overlay">
+                                <div class="d-flex justify-content-center">
+                                    <a href="#" class="btn btn-sm btn-outline-light me-2">
+                                        <i class="fas fa-envelope"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-sm btn-outline-light">
+                                        <i class="fas fa-info-circle"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <span class="guru-category">Guru Kelas</span>
+                            <h5 class="card-title">Bapak Hendra Wijaya</h5>
+                            <p class="card-text text-muted">Kelas 4B</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Guru Mata Pelajaran -->
+        <section class="container py-5 bg-light">
+            <h2 class="text-center section-title">Guru Mata Pelajaran</h2>
+            <div class="row">
+                <!-- Guru Agama -->
+                <div class="col-md-4 col-lg-3">
+                    <div class="guru-card">
+                        <div class="guru-img-container">
+                            <img src="images/guru-agama.jpeg" alt="Guru Agama" class="guru-img">
+                            <div class="guru-overlay">
+                                <div class="d-flex justify-content-center">
+                                    <a href="#" class="btn btn-sm btn-outline-light me-2">
+                                        <i class="fas fa-envelope"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-sm btn-outline-light">
+                                        <i class="fas fa-info-circle"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <span class="guru-category">Agama Islam</span>
+                            <h5 class="card-title">Ustadz Ahmad Fauzi</h5>
+                            <p class="card-text text-muted">
+                                <i class="fas fa-quran subject-icon"></i>Pendidikan Agama
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Guru Matematika -->
+                <div class="col-md-4 col-lg-3">
+                    <div class="guru-card">
+                        <div class="guru-img-container">
+                            <img src="images/guru-math.jpg" alt="Guru Matematika" class="guru-img">
+                            <div class="guru-overlay">
+                                <div class="d-flex justify-content-center">
+                                    <a href="#" class="btn btn-sm btn-outline-light me-2">
+                                        <i class="fas fa-envelope"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-sm btn-outline-light">
+                                        <i class="fas fa-info-circle"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <span class="guru-category">Matematika</span>
+                            <h5 class="card-title">Bapak Budi Santoso</h5>
+                            <p class="card-text text-muted">
+                                <i class="fas fa-calculator subject-icon"></i>Matematika
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Guru IPA -->
+                <div class="col-md-4 col-lg-3">
+                    <div class="guru-card">
+                        <div class="guru-img-container">
+                            <img src="images/guru-ipa.jpg" alt="Guru IPA" class="guru-img">
+                            <div class="guru-overlay">
+                                <div class="d-flex justify-content-center">
+                                    <a href="#" class="btn btn-sm btn-outline-light me-2">
+                                        <i class="fas fa-envelope"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-sm btn-outline-light">
+                                        <i class="fas fa-info-circle"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <span class="guru-category">Ilmu Pengetahuan Alam</span>
+                            <h5 class="card-title">Ibu Rani Purwanti</h5>
+                            <p class="card-text text-muted">
+                                <i class="fas fa-flask subject-icon"></i>IPA Terpadu
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Guru Bahasa Inggris -->
+                <div class="col-md-4 col-lg-3">
+                    <div class="guru-card">
+                        <div class="guru-img-container">
+                            <img src="images/guru-eng.jpeg" alt="Guru Bahasa Inggris" class="guru-img">
+                            <div class="guru-overlay">
+                                <div class="d-flex justify-content-center">
+                                    <a href="#" class="btn btn-sm btn-outline-light me-2">
+                                        <i class="fas fa-envelope"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-sm btn-outline-light">
+                                        <i class="fas fa-info-circle"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <span class="guru-category">Bahasa Inggris</span>
+                            <h5 class="card-title">Ibu Maya Indah</h5>
+                            <p class="card-text text-muted">
+                                <i class="fas fa-language subject-icon"></i>English for Kids
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center">
+            <div class="container">
+                <p class="mb-1">
+                    &copy; 2025 SD Muhammadiyah Denpasar. All rights reserved.
+                </p>
+                <small >Data yang dikirim bersifat rahasia dan hanya digunakan untuk keperluan
+                    administrasi sekolah.</small >
+            </div>
+        </footer>
+
+        <!-- Scripts -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Scripts -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script>
+            AOS.init();
+
+            const API_BASE = "http://localhost:3000/api";
+
+            // Load teacher data from API
+            async function loadTeachers() {
+                try {
+                    const response = await fetch(`${API_BASE}/teacher-displays/public`);
+                    const teachers = await response.json();
+
+                    if (!response.ok) {
+                        throw new Error(teachers.error || 'Failed to fetch teachers');
+                    }
+
+                    renderTeachers(teachers);
+                } catch (error) {
+                    console.error('Error loading teachers:', error);
+                    document.getElementById('teacherSections').innerHTML = `
+                        <div class="error-message">
+                            <i class="fas fa-exclamation-triangle fa-2x"></i>
+                            <p class="mt-3">Gagal memuat data guru. Menampilkan data default.</p>
+                        </div>
+                    `;
+                    // Fallback to static data
+                    renderStaticTeachers();
+                }
+            }
+
+            function renderTeachers(teachers) {
+                // Group teachers by category
+                const groupedTeachers = teachers.reduce((groups, teacher) => {
+                    const category = teacher.category;
+                    if (!groups[category]) {
+                        groups[category] = [];
+                    }
+                    groups[category].push(teacher);
+                    return groups;
+                }, {});
+
+                let sectionsHtml = '';
+
+                // Define category order and titles
+                const categoryConfig = {
+                    'Kepala Sekolah': { title: 'Manajemen Sekolah', bgClass: 'bg-light' },
+                    'Wakil Kepala Sekolah': { title: 'Manajemen Sekolah', bgClass: 'bg-light' },
+                    'Guru Kelas': { title: 'Guru Kelas', bgClass: '' },
+                    'Guru Mata Pelajaran': { title: 'Guru Mata Pelajaran', bgClass: 'bg-light' },
+                    'Staff': { title: 'Staff Sekolah', bgClass: '' }
+                };
+
+                // Combine management categories
+                const managementTeachers = [
+                    ...(groupedTeachers['Kepala Sekolah'] || []),
+                    ...(groupedTeachers['Wakil Kepala Sekolah'] || [])
+                ];
+
+                if (managementTeachers.length > 0) {
+                    sectionsHtml += createTeacherSection('Manajemen Sekolah', managementTeachers, 'bg-light');
+                }
+
+                // Add other categories
+                Object.keys(groupedTeachers).forEach(category => {
+                    if (category !== 'Kepala Sekolah' && category !== 'Wakil Kepala Sekolah') {
+                        const config = categoryConfig[category] || { title: category, bgClass: '' };
+                        sectionsHtml += createTeacherSection(config.title, groupedTeachers[category], config.bgClass);
+                    }
+                });
+
+                document.getElementById('teacherSections').innerHTML = sectionsHtml;
+            }
+
+            function createTeacherSection(title, teachers, bgClass) {
+                let cardsHtml = '';
+                
+                teachers.forEach(teacher => {
+                    const photoUrl = teacher.photo_url || 'https://images.pexels.com/photos/5212345/pexels-photo-5212345.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop';
+                    const subject = teacher.subject || teacher.position;
+                    const email = teacher.email || '#';
+                    const description = teacher.description || '';
+
+                    cardsHtml += `
+                        <div class="col-md-4 col-lg-3" data-aos="fade-up">
+                            <div class="guru-card">
+                                <div class="guru-img-container">
+                                    <img src="${photoUrl}" alt="${teacher.name}" class="guru-img" onerror="this.src='https://images.pexels.com/photos/5212345/pexels-photo-5212345.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop'">
+                                    <div class="guru-overlay">
+                                        <div class="d-flex justify-content-center">
+                                            ${email !== '#' ? `<a href="mailto:${email}" class="btn btn-sm btn-outline-light me-2"><i class="fas fa-envelope"></i></a>` : ''}
+                                            ${description ? `<a href="#" class="btn btn-sm btn-outline-light" onclick="showTeacherInfo('${teacher.name}', '${description}')"><i class="fas fa-info-circle"></i></a>` : ''}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <span class="guru-category">${teacher.category}</span>
+                                    <h5 class="card-title">${teacher.name}</h5>
+                                    <p class="card-text text-muted">${subject}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                return `
+                    <section class="container py-5 ${bgClass}">
+                        <h2 class="text-center section-title">${title}</h2>
+                        <div class="row">
+                            ${cardsHtml}
+                        </div>
+                    </section>
+                `;
+            }
+
+            function showTeacherInfo(name, description) {
+                alert(`${name}\n\n${description}`);
+            }
+
+            function renderStaticTeachers() {
+                // Fallback static data
+                const staticHtml = `
+                    <!-- Manajemen SD Muhammadiyah Denpasar -->
+                    <section id="manajemen" class="container py-5 bg-light">
+                        <h2 class="text-center section-title">Manajemen Sekolah</h2>
+                        <div class="row">
+                            <!-- Kepala Sekolah -->
+                            <div class="col-md-4 col-lg-3" data-aos="fade-up">
+                                <div class="guru-card">
+                                    <div class="guru-img-container">
+                                        <img src="https://images.pexels.com/photos/5212345/pexels-photo-5212345.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" alt="Kepala Sekolah" class="guru-img">
+                                        <div class="guru-overlay">
+                                            <div class="d-flex justify-content-center">
+                                                <a href="#" class="btn btn-sm btn-outline-light me-2">
+                                                    <i class="fas fa-envelope"></i>
+                                                </a>
+                                                <a href="#" class="btn btn-sm btn-outline-light">
+                                                    <i class="fas fa-info-circle"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <span class="guru-category">Kepala Sekolah</span>
+                                        <h5 class="card-title">Bapak Rifqi Maulana, S.Pd., Gr., M.Pd.</h5>
+                                        <p class="card-text text-muted">Kepala Sekolah</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Wakil Kepala Sekolah -->
+                            <div class="col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                                <div class="guru-card">
+                                    <div class="guru-img-container">
+                                        <img src="https://images.pexels.com/photos/5212345/pexels-photo-5212345.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" alt="Wakil Kepala" class="guru-img">
+                                        <div class="guru-overlay">
+                                            <div class="d-flex justify-content-center">
+                                                <a href="#" class="btn btn-sm btn-outline-light me-2">
+                                                    <i class="fas fa-envelope"></i>
+                                                </a>
+                                                <a href="#" class="btn btn-sm btn-outline-light">
+                                                    <i class="fas fa-info-circle"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <span class="guru-category">Wakil Kepala Sekolah</span>
+                                        <h5 class="card-title">Ibu Resti Hidayah</h5>
+                                        <p class="card-text text-muted">Wakil Kepala Sekolah</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Guru Kelas -->
+                    <section class="container py-5">
+                        <h2 class="text-center section-title">Guru Kelas</h2>
+                        <div class="row">
+                            <div class="col-md-4 col-lg-3" data-aos="fade-up">
+                                <div class="guru-card">
+                                    <div class="guru-img-container">
+                                        <img src="https://images.pexels.com/photos/5212345/pexels-photo-5212345.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop" alt="Guru Kelas 1" class="guru-img">
+                                        <div class="guru-overlay">
+                                            <div class="d-flex justify-content-center">
+                                                <a href="#" class="btn btn-sm btn-outline-light me-2">
+                                                    <i class="fas fa-envelope"></i>
+                                                </a>
+                                                <a href="#" class="btn btn-sm btn-outline-light">
+                                                    <i class="fas fa-info-circle"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <span class="guru-category">Guru Kelas</span>
+                                        <h5 class="card-title">Ibu Siti Rahayu</h5>
+                                        <p class="card-text text-muted">Kelas 1A</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                `;
+                document.getElementById('teacherSections').innerHTML = staticHtml;
+            }
+
+            // Load teachers when page loads
+            document.addEventListener('DOMContentLoaded', loadTeachers);
+        </script>
+    </body>
+</html>
